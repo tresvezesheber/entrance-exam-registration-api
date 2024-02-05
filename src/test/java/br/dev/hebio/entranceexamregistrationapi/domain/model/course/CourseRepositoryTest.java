@@ -17,15 +17,8 @@ public class CourseRepositoryTest {
 
     @Test
     public void testSaveAndFindCourse() {
-        Course course = new Course();
-        course.setName("Direito");
-        course.setModality("Graduação");
-        course.setDuration("5 anos");
-        course.setMode("Presencial");
-        course.setUnit("HebIO Dev");
-        course.setPeriod("Noturno");
-        course.setMonthlyFee("R$ 780,00");
-        course.setDescription("O curso de Direito da HebIO Dev tem como objetivo geral o desenvolvimento de um curso de Ciências Jurídicas, voltado para o conhecimento jurídico com formação humanista.");
+        CreateCourseDto createCourseDto = new CreateCourseDto("Direito", "Graduação", "5 anos", "Presencial", "HebIO Dev", "Noturno", "R$ 780,00", "O curso de Direito da HebIO Dev tem como objetivo geral o desenvolvimento de um curso de Ciências Jurídicas, voltado para o conhecimento jurídico com formação humanista.");
+        Course course = new Course(createCourseDto);
         course.setActive(true);
 
         courseRepository.save(course);

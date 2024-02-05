@@ -2,6 +2,7 @@ package br.dev.hebio.entranceexamregistrationapi.domain.service;
 
 import br.dev.hebio.entranceexamregistrationapi.domain.exception.CourseNotFoundException;
 import br.dev.hebio.entranceexamregistrationapi.domain.model.course.Course;
+import br.dev.hebio.entranceexamregistrationapi.domain.model.course.CreateCourseDto;
 import br.dev.hebio.entranceexamregistrationapi.domain.model.course.DetailsCourseDto;
 import br.dev.hebio.entranceexamregistrationapi.domain.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class CourseService {
                 .toList();
     }
 
-    public Course saveCourse(Course course) {
-        return courseRepository.save(course);
+    public Long saveCourse(CreateCourseDto createCourseDto) {
+        return courseRepository.save(new Course(createCourseDto)).getId();
     }
 
     public DetailsCourseDto findCourseById(Long id) {

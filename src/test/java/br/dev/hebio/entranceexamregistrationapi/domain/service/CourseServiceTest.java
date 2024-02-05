@@ -1,6 +1,7 @@
 package br.dev.hebio.entranceexamregistrationapi.domain.service;
 
 import br.dev.hebio.entranceexamregistrationapi.domain.model.course.Course;
+import br.dev.hebio.entranceexamregistrationapi.domain.model.course.CreateCourseDto;
 import br.dev.hebio.entranceexamregistrationapi.domain.model.course.DetailsCourseDto;
 import br.dev.hebio.entranceexamregistrationapi.domain.repository.CourseRepository;
 import org.junit.jupiter.api.Test;
@@ -24,9 +25,12 @@ public class CourseServiceTest {
     @InjectMocks
     private CourseService courseService;
 
+    CreateCourseDto createCourseDto1 = new CreateCourseDto("Direito", "Graduação", "5 anos", "Presencial", "HebIO Dev", "Noturno", "R$ 780,00", "O curso de Direito da HebIO Dev tem como objetivo geral o desenvolvimento de um curso de Ciências Jurídicas, voltado para o conhecimento jurídico com formação humanista.");
+    CreateCourseDto createCourseDto2 = new CreateCourseDto("Pedagogia", "Graduação", "4 anos", "Presencial", "HebIO Dev", "Noturno", "R$ 620,00", "O Curso de de Pedagogia da Faculdade de Miguel Pereira tem como objetivo formar o Pedagogo para atuação em diferentes ramos do mundo do trabalho, que corresponda às exigências de uma formação de qualidade e que demonstre uma postura que faça frente às expectativas e demandas sociais.");
+
     @Test
     public void testFindCourseById() {
-        Course course = new Course();
+        Course course = new Course(createCourseDto1);
         course.setId(1L);
 
         when(courseRepository.findById(1L)).thenReturn(Optional.of(course));
@@ -40,7 +44,7 @@ public class CourseServiceTest {
 
     @Test
     public void testDeleteCourse() {
-        Course course = new Course();
+        Course course = new Course(createCourseDto1);
         course.setId(1L);
 
         when(courseRepository.findById(1L)).thenReturn(Optional.of(course));
@@ -53,9 +57,9 @@ public class CourseServiceTest {
 
     @Test
     public void testListAllCourses() {
-        Course course1 = new Course();
+        Course course1 = new Course(createCourseDto1);
         course1.setId(1L);
-        Course course2 = new Course();
+        Course course2 = new Course(createCourseDto2);
         course2.setId(2L);
 
         when(courseRepository.findAll()).thenReturn(List.of(course1, course2));
@@ -71,15 +75,15 @@ public class CourseServiceTest {
 
     @Test
     public void testSaveCourse() {
-        Course course = new Course();
+        Course course = new Course(createCourseDto1);
         course.setId(1L);
 
         when(courseRepository.save(any(Course.class))).thenReturn(course);
 
-        Course result = courseService.saveCourse(course);
+        Long resultId = courseService.saveCourse(createCourseDto1);
 
-        assertEquals(course.getId(), result.getId());
+        assertEquals(course.getId(), resultId);
 
-        verify(courseRepository, times(1)).save(course);
+        verify(courseRepository, times(1)).save(any(Course.class));
     }
 }
