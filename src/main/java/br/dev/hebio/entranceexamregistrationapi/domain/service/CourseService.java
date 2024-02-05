@@ -27,6 +27,11 @@ public class CourseService {
         return courseRepository.save(new Course(createCourseDto)).getId();
     }
 
+    public void updateCourse(Long id, CreateCourseDto createCourseDto) {
+        Course course = courseRepository.findById(id).orElseThrow(() -> new CourseNotFoundException("Course with id: " + id + " not found"));
+        course.update(createCourseDto);
+    }
+
     public DetailsCourseDto findCourseById(Long id) {
         Course courseFound = courseRepository.findById(id).orElseThrow(() -> new CourseNotFoundException("Course with id: " + id + " not found"));
         return new DetailsCourseDto(courseFound);

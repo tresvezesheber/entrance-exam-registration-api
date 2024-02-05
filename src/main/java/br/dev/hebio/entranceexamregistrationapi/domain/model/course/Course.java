@@ -58,4 +58,15 @@ public class Course {
         this.description = courseDto.description();
         this.active = true;
     }
+
+    public void update(CreateCourseDto courseDto) {
+        this.name = courseDto.name();
+        this.modality = courseDto.modality();
+        this.duration = courseDto.duration();
+        this.mode = courseDto.mode();
+        this.unit = courseDto.unit();
+        this.period = courseDto.period();
+        this.monthlyFee = courseDto.monthlyFee();
+        this.description = courseDto.description();
+    }
 }
