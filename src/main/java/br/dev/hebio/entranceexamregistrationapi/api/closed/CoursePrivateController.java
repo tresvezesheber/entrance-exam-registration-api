@@ -30,4 +30,5 @@ public class CoursePrivateController {
         courseService.updateCourse(id, createCourseDto);
         return ResponseEntity.noContent().build();
     }
+
 }
