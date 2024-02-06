@@ -1,14 +1,15 @@
 package br.dev.hebio.entranceexamregistrationapi.domain.model.inscription;
 
+import br.dev.hebio.entranceexamregistrationapi.domain.model.course.Course;
 import br.dev.hebio.entranceexamregistrationapi.domain.model.entrancetype.EntranceType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import br.dev.hebio.entranceexamregistrationapi.domain.service.CourseService;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Getter
 @Setter
@@ -61,6 +62,30 @@ public class Inscription {
 
     @NotBlank
     private String howDidYouKnow;
+
+    @ManyToOne
+    @NonNull
+    @JoinColumn(name = "course_id")
+    private Course course;
+
+    public Inscription(InscriptionInput inscriptionInput) {
+        this.name = inscriptionInput.name();
+        this.email = inscriptionInput.email();
+        this.cpf = inscriptionInput.cpf();
+        this.gender = inscriptionInput.gender();
+        this.phone = inscriptionInput.phone();
+        this.cellPhone = inscriptionInput.cellPhone();
+        this.entranceType = inscriptionInput.entranceType();
+        this.address = inscriptionInput.address();
+        this.number = inscriptionInput.number();
+        this.complement = inscriptionInput.complement();
+        this.neighborhood = inscriptionInput.neighborhood();
+        this.city = inscriptionInput.city();
+        this.postalCode = inscriptionInput.postalCode();
+        this.state = inscriptionInput.state();
+        this.howDidYouKnow = inscriptionInput.howDidYouKnow();
+        this.course = inscriptionInput.course();
+    }
 
     public String getEntranceType() {
         return entranceType.getdescription();
