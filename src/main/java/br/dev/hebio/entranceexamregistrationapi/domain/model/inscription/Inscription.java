@@ -40,6 +40,7 @@ public class Inscription {
     private String cellPhone;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private EntranceType entranceType;
 
     @NotBlank
