@@ -66,7 +66,7 @@ public class Inscription {
     @NotBlank
     private String howDidYouKnow;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @NonNull
     @JoinColumn(name = "course_id")
     private Course course;
