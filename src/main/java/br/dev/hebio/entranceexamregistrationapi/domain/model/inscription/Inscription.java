@@ -88,8 +88,4 @@ public class Inscription {
         this.howDidYouKnow = inscriptionInput.howDidYouKnow();
         this.course = inscriptionInput.course();
     }
-
-//    public String getEntranceType() {
-//        return entranceType.getdescription();
-//    }
 }
