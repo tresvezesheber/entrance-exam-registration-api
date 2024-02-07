@@ -89,7 +89,7 @@ public class Inscription {
         this.course = inscriptionInput.course();
     }
 
-    public String getEntranceType() {
-        return entranceType.getdescription();
-    }
+//    public String getEntranceType() {
+//        return entranceType.getdescription();
+//    }
 }

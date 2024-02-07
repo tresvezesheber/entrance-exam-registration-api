@@ -2,6 +2,7 @@ package br.dev.hebio.entranceexamregistrationapi.domain.service;
 
 import br.dev.hebio.entranceexamregistrationapi.domain.model.inscription.Inscription;
 import br.dev.hebio.entranceexamregistrationapi.domain.model.inscription.InscriptionAccomplished;
+import br.dev.hebio.entranceexamregistrationapi.domain.model.inscription.InscriptionDetails;
 import br.dev.hebio.entranceexamregistrationapi.domain.model.inscription.InscriptionInput;
 import br.dev.hebio.entranceexamregistrationapi.domain.repository.InscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,13 @@ public class InscriptionService {
         return inscriptionRepository.findAll()
                 .stream()
                 .map(InscriptionAccomplished::new)
+                .toList();
+    }
+
+    public List<InscriptionDetails> listAllInscriptionsPrivate() {
+        return inscriptionRepository.findAll()
+                .stream()
+                .map(InscriptionDetails::new)
                 .toList();
     }
 
