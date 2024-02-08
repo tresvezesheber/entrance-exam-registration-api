@@ -1,5 +1,6 @@
 package br.dev.hebio.entranceexamregistrationapi.domain.service;
 
+import br.dev.hebio.entranceexamregistrationapi.domain.exception.InscriptionNotFoundException;
 import br.dev.hebio.entranceexamregistrationapi.domain.model.inscription.Inscription;
 import br.dev.hebio.entranceexamregistrationapi.domain.model.inscription.InscriptionAccomplished;
 import br.dev.hebio.entranceexamregistrationapi.domain.model.inscription.InscriptionDetails;
@@ -31,7 +32,7 @@ public class InscriptionService {
     }
 
     public InscriptionAccomplished findInscriptionById(Long id) {
-        Inscription inscription = inscriptionRepository.findById(id).orElseThrow(() -> new RuntimeException("Inscription with id: " + id + " not found"));
+        Inscription inscription = inscriptionRepository.findById(id).orElseThrow(() -> new InscriptionNotFoundException("Inscription with id: " + id + " not found"));
         return new InscriptionAccomplished(inscription);
     }
 
