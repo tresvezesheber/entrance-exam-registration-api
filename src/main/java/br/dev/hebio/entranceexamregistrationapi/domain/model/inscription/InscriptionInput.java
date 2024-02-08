@@ -10,7 +10,7 @@ public record InscriptionInput(
         String gender,
         String phone,
         String cellPhone,
-        EntranceType entranceType,
+        String entranceType,
         String address,
         String number,
         String complement,

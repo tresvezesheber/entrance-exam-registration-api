@@ -1,5 +1,7 @@
 package br.dev.hebio.entranceexamregistrationapi.domain.model.entrancetype;
 
+import br.dev.hebio.entranceexamregistrationapi.domain.exception.InvalidEntranceTypeException;
+
 public enum EntranceType {
 
     VESTIBULAR("Vestibular Digital 2024.1 Prova Online"),
@@ -12,6 +14,15 @@ public enum EntranceType {
 
     private EntranceType(String description) {
         this.description = description;
+    }
+
+    public static EntranceType fromString(String value) {
+        for (EntranceType type : EntranceType.values()) {
+            if (type.name().equalsIgnoreCase(value)) {
+                return type;
+            }
+        }
+        throw new InvalidEntranceTypeException("Invalid EntranceType: " + value);
     }
 
     public String getdescription() {

@@ -1,6 +1,7 @@
 package br.dev.hebio.entranceexamregistrationapi.domain.service;
 
 import br.dev.hebio.entranceexamregistrationapi.domain.exception.InscriptionNotFoundException;
+import br.dev.hebio.entranceexamregistrationapi.domain.model.entrancetype.EntranceType;
 import br.dev.hebio.entranceexamregistrationapi.domain.model.inscription.Inscription;
 import br.dev.hebio.entranceexamregistrationapi.domain.model.inscription.InscriptionAccomplished;
 import br.dev.hebio.entranceexamregistrationapi.domain.model.inscription.InscriptionDetails;
@@ -37,6 +38,7 @@ public class InscriptionService {
     }
 
     public Long saveInscription(InscriptionInput inscriptionInput) {
+        EntranceType.fromString(inscriptionInput.entranceType());
         return inscriptionRepository.save(new Inscription(inscriptionInput)).getId();
     }
 }
