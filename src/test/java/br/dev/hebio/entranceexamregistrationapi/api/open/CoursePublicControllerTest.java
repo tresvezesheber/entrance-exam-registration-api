@@ -27,8 +27,8 @@ class CoursePublicControllerTest {
     private CourseService courseService;
 
     @Test
-    @DisplayName("Should return http status code 200 when trying to get a course by id")
-    void shouldReturnHttpStatus200WhenGetCourseById() throws Exception {
+    @DisplayName("Should return http status code 200 when trying to get a course with valid id")
+    void shouldReturnHttpStatus200WhenGetCourseWithValidId() throws Exception {
         var response = mockMvc.perform(get("/public/course/1"))
                 .andReturn().getResponse();
 
@@ -39,7 +39,7 @@ class CoursePublicControllerTest {
     @DisplayName("Should return http status code 404 when trying to get a course with invalid id")
     void shouldReturnHttpStatus404WhenGetCourseWithInvalidId() throws Exception {
         doThrow(new CourseNotFoundException("Course with id: 1 not found")).when(courseService).findCourseById(eq(1L));
-        
+
         var response = mockMvc.perform(get("/public/course/1"))
                 .andReturn().getResponse();
 
