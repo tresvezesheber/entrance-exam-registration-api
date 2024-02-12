@@ -27,7 +27,7 @@ public class CoursePrivateController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity updateCourse(@PathVariable Long id, @RequestBody CreateCourseDto createCourseDto) {
+    public ResponseEntity updateCourse(@PathVariable Long id, @RequestBody @Valid CreateCourseDto createCourseDto) {
         courseService.updateCourse(id, createCourseDto);
         return ResponseEntity.noContent().build();
     }
