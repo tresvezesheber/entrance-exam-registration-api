@@ -2,7 +2,6 @@ package br.dev.hebio.entranceexamregistrationapi.domain.model.inscription;
 
 import br.dev.hebio.entranceexamregistrationapi.domain.model.course.Course;
 import br.dev.hebio.entranceexamregistrationapi.domain.model.entrancetype.EntranceType;
-import br.dev.hebio.entranceexamregistrationapi.domain.service.CourseService;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -10,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Getter
 @Setter
@@ -40,6 +38,7 @@ public class Inscription {
     private String cellPhone;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private EntranceType entranceType;
 
     @NotBlank
@@ -65,7 +64,7 @@ public class Inscription {
     @NotBlank
     private String howDidYouKnow;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @NonNull
     @JoinColumn(name = "course_id")
     private Course course;
@@ -77,7 +76,7 @@ public class Inscription {
         this.gender = inscriptionInput.gender();
         this.phone = inscriptionInput.phone();
         this.cellPhone = inscriptionInput.cellPhone();
-        this.entranceType = inscriptionInput.entranceType();
+        this.entranceType = EntranceType.fromString(inscriptionInput.entranceType());
         this.address = inscriptionInput.address();
         this.number = inscriptionInput.number();
         this.complement = inscriptionInput.complement();
